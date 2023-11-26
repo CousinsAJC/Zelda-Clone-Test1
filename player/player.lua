@@ -10,6 +10,17 @@ function playerLoad()
         blinkTimer = 0
     }
 
+    --[[
+        moveState will be a state machine for the player
+        1 - idle
+        2 - left
+        3 - right
+        4 - up
+        5 - down
+        6 - jumping
+        7 - dashing
+    ]]
+    p1.moveState = 1
 
     p1.spriteSheet = love.graphics.newImage("assets/sprites/square-full-girl-blink.png")
     p1.spriteSheet:setFilter("nearest")
@@ -48,16 +59,19 @@ function playerInput(dt)
 
     if love.keyboard.isDown("a") then
         p1.x = p1.x - p1.pace
+        p1.moveState = 2
         --p1.isMoving = true
     end
 
     if love.keyboard.isDown("d") then
         p1.x = p1.x + p1.pace
+        p1.moveState = 3
         --p1.isMoving = true
     end
 
     if love.keyboard.isDown("w") then
         p1.y = p1.y - p1.pace
+        p1.moveState
         --p1.isMoving = true
     end
 
